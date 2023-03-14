@@ -154,7 +154,7 @@ func handleConnection(conn net.Conn) {
 	fmt.Println("Request path:", path)
 	ja3hash := md5.Sum([]byte(ja3))
 	// Send the HTTP response
-	response := "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nja3:" + ja3 + "\nja3hash: " + hex.EncodeToString(ja3hash[:]) + "\r\n"
+	response := "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nja3:" + ja3 + "\nja3hash: " + hex.EncodeToString(ja3hash[:]) + "\r\nip: " + conn.RemoteAddr().String()
 	if _, err := conn.Write([]byte(response)); err != nil {
 		log.Println(err)
 		return
