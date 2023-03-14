@@ -58,12 +58,12 @@ func main() {
 			fmt.Println("GetConfigForClientHandler for:", ch.ServerName)
 			ja3ext := ja3Extension{
 				Ciphers:                   make([]uint16, len(ch.CipherSuites[1:])),
-				Extensions:                make([]uint16, len(ch.Extensions[1:])),
+				Extensions:                make([]uint16, len(ch.Extensions[:])),
 				EllipticCurves:            make([]utls.CurveID, len(ch.SupportedCurves[1:])),
 				EllipticCurvePointFormats: make([]uint8, len(ch.SupportedPoints[:])),
 			}
 			if len(ch.SupportedVersions) > 0 {
-				ja3ext.TLSVersion = ch.SupportedVersions[2]
+				ja3ext.TLSVersion = ch.SupportedVersions[1]
 			}
 			copy(ja3ext.Ciphers, ch.CipherSuites[1:])
 			copy(ja3ext.Extensions, ch.Extensions[:])
